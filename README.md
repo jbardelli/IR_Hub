@@ -8,3 +8,4 @@ Main  Features:
 3) Commands are received via wifi using the MQTT protocol wich has low overhead and allows integration con external servers and voice activated devices like google home
 4) Firmware can be updated over the air (OTA) which allows easy updates on installed devices
 5) A function to contorl an RGB led strip is available but power transistors have to be used to allow th uController to drive it
+6) Configuration and web pages are stored in non-volatile memory in json format
