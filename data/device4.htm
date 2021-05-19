@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html><head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
+	<title>IR Hub Device 4 Configuration</title>
+	<h3>IR Hub Device 4 Configuration</h3>
+	<style>
+		input {
+			font-size:1em;
+			text-align: center;
+			width: 150px;
+		}
+		select {
+			font-size:1em;
+		}
+		body {
+			text-align:center;
+			font-family:arial;
+			font-size:1em;
+		}
+		button {
+			font-size:1em;
+		}
+		</style>
+</head>
+<body onload="load_data()">
+	<div style='text-align:center;display:inline-block;width:640px'>
+		<a href="index.htm">Main Menu</a><br><br>
+		<form id="serverform" onsubmit="transmit(this);return false">
+		<input type="hidden" name="device" value="4">
+		<table>			
+				<tr>
+					<td>Device Name</td>
+					<td><input type="text" id="device_name" name="device_name" /></td>
+					</tr>
+				<tr>
+					<td>IR Protocol</td>
+					<td><select id="ir_protocol" name="ir_protocol">  
+						  <option value="NEC" 		height="35">NEC</option>
+						  <option value="SONY" 		height="35">SONY</option>
+						  <option value="PANASONIC" height="35">PANASONIC</option>
+						  <option value="SAMSUNG" 	height="35">SAMSUNG</option>
+						  <option value="LG" 		height="35">LG</option>
+						  <option value="JVC" 		height="35">JVC</option>
+						  <option value="DENON" 	height="35">DENON</option
+					</select></td>
+					</tr>
+				<tr><td><br /></td></tr>			
+				<tr>
+					<th>Command</th>
+					<th>HEX Code 1</th>
+					<th>HEX Code 2</th>
+					<th> </th>
+					</tr>
+				<tr>	
+					<td>Volume+</td>
+					<td><input type="text" 	id="volup_HEX1" name="volup_HEX1" /></td>
+					<td><input type="text" 	id="volup_HEX2" name="volup_HEX2" /></td>
+					<td><input type="button"id="volup"		onclick="record('volup','volup_HEX1','volup_HEX2')" value="Record"></td>
+					</tr>
+				<tr>	
+					<td>Volume-</td>
+					<td><input type="text" 	id="voldwn_HEX1" name="voldwn_HEX1" /></td>
+					<td><input type="text" 	id="voldwn_HEX2" name="voldwn_HEX2" /></td>
+					<td><input type="button"id="voldwn" 	 onclick="record('voldwn','voldwn_HEX1','voldwn_HEX2')" value="Record"></td>
+					</tr>
+				<tr>	
+					<td>Digit 0</td>
+					<td><input type="text" 	id="digit0_HEX1" name="digit0_HEX1" /></td>
+					<td><input type="text" 	id="digit0_HEX2" name="digit0_HEX2" /></td>
+					<td><input type="button"id="digit0" 	 onclick="record('digit0','digit0_HEX1','digit0_HEX2')" value="Record"></td>
+					</tr>
+				<tr>	
+					<td>Digit 1</td>
+					<td><input type="text" 	id="digit1_HEX1" name="digit1_HEX1" /></td>
+					<td><input type="text" 	id="digit1_HEX2" name="digit1_HEX2" /></td>
+					<td><input type="button"id="digit1" 	 onclick="record('digit1','digit1_HEX1','digit1_HEX2')" value="Record"></td>
+					</tr>
+				<tr>	
+					<td>Digit 2</td>
+					<td><input type="text" 	id="digit2_HEX1" name="digit2_HEX1" /></td>
+					<td><input type="text" 	id="digit2_HEX2" name="digit2_HEX2" /></td>
+					<td><input type="button"id="digit2" 	 onclick="record('digit2','digit2_HEX1','digit2_HEX2')" value="Record"></td>
+					</tr>
+				<tr>	
+					<td>Digit 3</td>
+					<td><input type="text" 	id="digit3_HEX1" name="digit3_HEX1" /></td>
+					<td><input type="text" 	id="digit3_HEX2" name="digit3_HEX2" /></td>
+					<td><input type="button"id="digit3" 	 onclick="record('digit3','digit3_HEX1','digit3_HEX2')" value="Record"></td>
+					</tr>
+				<tr>	
+					<td>Digit 4</td>
+					<td><input type="text" 	id="digit4_HEX1" name="digit4_HEX1" /></td>
+					<td><input type="text" 	id="digit4_HEX2" name="digit4_HEX2" /></td>
+					<td><input type="button"id="digit4" 	 onclick="record('digit4','digit4_HEX1','digit4_HEX2')" value="Record"></td>
+					</tr>
+								<tr>	
+					<td>Digit 5</td>
+					<td><input type="text" 	id="digit5_HEX1" name="digit5_HEX1" /></td>
+					<td><input type="text" 	id="digit5_HEX2" name="digit5_HEX2" /></td>
+					<td><input type="button"id="digit5" 	 onclick="record('digit5','digit5_HEX1','digit5_HEX2')" value="Record"></td>
+					</tr>
+				<tr>	
+					<td>Digit 6</td>
+					<td><input type="text" 	id="digit6_HEX1" name="digit6_HEX1" /></td>
+					<td><input type="text" 	id="digit6_HEX2" name="digit6_HEX2" /></td>
+					<td><input type="button"id="digit6" 	 onclick="record('digit6','digit6_HEX1','digit6_HEX2')" value="Record"></td>
+					</tr>
+				<tr>	
+					<td>Digit 7</td>
+					<td><input type="text" 	id="digit7_HEX1" name="digit7_HEX1" /></td>
+					<td><input type="text" 	id="digit7_HEX2" name="digit7_HEX2" /></td>
+					<td><input type="button"id="digit7" 	 onclick="record('digit7','digit7_HEX1','digit7_HEX2')" value="Record"></td>
+					</tr>
+				<tr>	
+					<td>Digit 8</td>
+					<td><input type="text" 	id="digit8_HEX1" name="digit8_HEX1" /></td>
+					<td><input type="text" 	id="digit8_HEX2" name="digit8_HEX2" /></td>
+					<td><input type="button"id="digit8" 	 onclick="record('digit8','digit8_HEX1','digit8_HEX2')" value="Record"></td>
+					</tr>	
+				<tr>	
+					<td>Digit 9</td>
+					<td><input type="text" 	id="digit9_HEX1" name="digit9_HEX1" /></td>
+					<td><input type="text" 	id="digit9_HEX2" name="digit9_HEX2" /></td>
+					<td><input type="button"id="digit9" 	 onclick="record('digit9','digit9_HEX1','digit9_HEX2')" value="Record"></td>
+					</tr>			
+				<tr>	
+					<td><input type="text" 	id="comm1" 		name="comm1" /></td>
+					<td><input type="text" 	id="comm1_HEX1" name="comm1_HEX1" /></td>
+					<td><input type="text" 	id="comm1_HEX2" name="comm1_HEX2" /></td>
+					<td><input type="button"id="comm1b"		onclick="record('comm1b','comm1_HEX1','comm1_HEX2')" value="Record"></td>
+					</tr>
+				<tr>	
+					<td><input type="text" 	id="comm2" 		name="comm2" /></td>
+					<td><input type="text" 	id="comm2_HEX1" name="comm2_HEX1" /></td>
+					<td><input type="text" 	id="comm2_HEX2" name="comm2_HEX2" /></td>
+					<td><input type="button"id="comm2b"		onclick="record('comm2b','comm2_HEX1','comm2_HEX2')" value="Record"></td>
+					</tr>
+				<tr>	
+					<td><input type="text" 	id="comm3" 		name="comm3" /></td>
+					<td><input type="text" 	id="comm3_HEX1" name="comm3_HEX1" /></td>
+					<td><input type="text" 	id="comm3_HEX2" name="comm3_HEX2" /></td>
+					<td><input type="button"id="comm3b"		onclick="record('comm3b','comm3_HEX1','comm3_HEX2')" value="Record"></td>
+					</tr>	
+				<tr>	
+					<td><input type="text" 	id="comm4" 		name="comm4" /></td>
+					<td><input type="text" 	id="comm4_HEX1" name="comm4_HEX1" /></td>
+					<td><input type="text" 	id="comm4_HEX2" name="comm4_HEX2" /></td>
+					<td><input type="button"id="comm4b"		onclick="record('comm4b','comm4_HEX1','comm4_HEX2')" value="Record"></td>
+					</tr>	
+				<tr>	
+					<td><input type="text" 	id="comm5" 		name="comm5" /></td>
+					<td><input type="text" 	id="comm5_HEX1" name="comm5_HEX1" /></td>
+					<td><input type="text" 	id="comm5_HEX2" name="comm5_HEX2" /></td>
+					<td><input type="button"id="comm5b"		onclick="record('comm5b','comm5_HEX1','comm5_HEX2')" value="Record"></td>
+					</tr>	
+				<tr>	
+					<td><input type="text" 	id="comm6" 		name="comm6" /></td>
+					<td><input type="text" 	id="comm6_HEX1" name="comm6_HEX1" /></td>
+					<td><input type="text" 	id="comm6_HEX2" name="comm6_HEX2" /></td>
+					<td><input type="button"id="comm6b"		onclick="record('comm6b','comm6_HEX1','comm6_HEX2')" value="Record"></td>
+					</tr>	
+				<tr>	
+					<td><input type="text" 	id="comm7" 		name="comm7" /></td>
+					<td><input type="text" 	id="comm7_HEX1" name="comm7_HEX1" /></td>
+					<td><input type="text" 	id="comm7_HEX2" name="comm7_HEX2" /></td>
+					<td><input type="button"id="comm7b"		onclick="record('comm7b','comm7_HEX1','comm7_HEX2')" value="Record"></td>
+					</tr>
+				<tr>	
+					<td><input type="text" 	id="comm8" 		name="comm8" /></td>
+					<td><input type="text" 	id="comm8_HEX1" name="comm8_HEX1" /></td>
+					<td><input type="text" 	id="comm8_HEX2" name="comm8_HEX2" /></td>
+					<td><input type="button"id="comm8b"		onclick="record('comm8b','comm8_HEX1','comm8_HEX2')" value="Record"></td>
+					</tr>
+				<tr>	
+					<td><input type="text" 	id="comm9" 		name="comm9" /></td>
+					<td><input type="text" 	id="comm9_HEX1" name="comm9_HEX1" /></td>
+					<td><input type="text" 	id="comm9_HEX2" name="comm9_HEX2" /></td>
+					<td><input type="button"id="comm9b"		onclick="record('comm9b','comm9_HEX1','comm9_HEX2')" value="Record"></td>
+					</tr>	
+				<tr>	
+					<td><input type="text" 	id="comm10" 	 name="comm10" /></td>
+					<td><input type="text" 	id="comm10_HEX1" name="comm10_HEX1" /></td>
+					<td><input type="text" 	id="comm10_HEX2" name="comm10_HEX2" /></td>
+					<td><input type="button"id="comm10b"	 onclick="record('comm10b','comm10_HEX1','comm10_HEX2')" value="Record"></td>
+					</tr>	
+				<tr>	
+					<td><input type="text" 	id="comm11" 	 name="comm11" /></td>
+					<td><input type="text" 	id="comm11_HEX1" name="comm11_HEX1" /></td>
+					<td><input type="text" 	id="comm11_HEX2" name="comm11_HEX2" /></td>
+					<td><input type="button"id="comm11b"	 onclick="record('comm11b','comm11_HEX1','comm11_HEX2')" value="Record"></td>
+					</tr>	
+				<tr>	
+					<td><input type="text" 	id="comm12" 	 name="comm12" /></td>
+					<td><input type="text" 	id="comm12_HEX1" name="comm12_HEX1" /></td>
+					<td><input type="text" 	id="comm12_HEX2" name="comm12_HEX2" /></td>
+					<td><input type="button"id="comm12b"	 onclick="record('comm12b','comm12_HEX1','comm12_HEX2')" value="Record"></td>
+					</tr>	
+				<tr>	
+					<td><input type="text" 	id="comm13" 	 name="comm13" /></td>
+					<td><input type="text" 	id="comm13_HEX1" name="comm13_HEX1" /></td>
+					<td><input type="text" 	id="comm13_HEX2" name="comm13_HEX2" /></td>
+					<td><input type="button"id="comm13b"	 onclick="record('comm13b','comm13_HEX1','comm13_HEX2')" value="Record"></td>
+					</tr>	
+				<tr>	
+					<td><input type="text" 	id="comm14" 	 name="comm14" /></td>
+					<td><input type="text" 	id="comm14_HEX1" name="comm14_HEX1" /></td>
+					<td><input type="text" 	id="comm14_HEX2" name="comm14_HEX2" /></td>
+					<td><input type="button"id="comm14b"	 onclick="record('comm14b','comm14_HEX1','comm14_HEX2')" value="Record"></td>
+					</tr>
+				<tr>	
+					<td><input type="text" 	id="comm15" 	 name="comm15" /></td>
+					<td><input type="text" 	id="comm15_HEX1" name="comm15_HEX1" /></td>
+					<td><input type="text" 	id="comm15_HEX2" name="comm15_HEX2" /></td>
+					<td><input type="button"id="comm15b"	 onclick="record('comm15b','comm15_HEX1','comm15_HEX2')" value="Record"></td>
+					</tr>
+				<tr>	
+					<td><input type="text" 	id="comm16" 	 name="comm16" /></td>
+					<td><input type="text" 	id="comm16_HEX1" name="comm16_HEX1" /></td>
+					<td><input type="text" 	id="comm16_HEX2" name="comm16_HEX2" /></td>
+					<td><input type="button"id="comm16b"	 onclick="record('comm16b','comm16_HEX1','comm16_HEX2')" value="Record"></td>
+					</tr>	
+				<tr>	
+					<td><input type="text" 	id="comm17" 	 name="comm17" /></td>
+					<td><input type="text" 	id="comm17_HEX1" name="comm17_HEX1" /></td>
+					<td><input type="text" 	id="comm17_HEX2" name="comm17_HEX2" /></td>
+					<td><input type="button"id="comm17b"	 onclick="record('comm17b','comm17_HEX1','comm17_HEX2')" value="Record"></td>
+					</tr>	
+				<tr>	
+					<td><input type="text" 	id="comm18" 	 name="comm18" /></td>
+					<td><input type="text" 	id="comm18_HEX1" name="comm18_HEX1" /></td>
+					<td><input type="text" 	id="comm18_HEX2" name="comm18_HEX2" /></td>
+					<td><input type="button"id="comm18b"	 onclick="record('comm18b','comm18_HEX1','comm18_HEX2')" value="Record"></td>
+					</tr>	
+				<tr>	
+					<td><input type="text" 	id="comm19" 	 name="comm19" /></td>
+					<td><input type="text" 	id="comm19_HEX1" name="comm19_HEX1" /></td>
+					<td><input type="text" 	id="comm19_HEX2" name="comm19_HEX2" /></td>
+					<td><input type="button"id="comm19b"	 onclick="record('comm19b','comm19_HEX1','comm19_HEX2')" value="Record"></td>
+					</tr>	
+				<tr>	
+					<td><input type="text" 	id="comm20" 	 name="comm20" /></td>
+					<td><input type="text" 	id="comm20_HEX1" name="comm20_HEX1" /></td>
+					<td><input type="text" 	id="comm20_HEX2" name="comm20_HEX2" /></td>
+					<td><input type="button"id="comm20b"	 onclick="record('comm20b','comm20_HEX1','comm20_HEX2')" value="Record" /></td>
+					</tr>										
+			</table>
+		<br>
+		<input id="submit" type="submit" value="Save"/>
+		</form>	
+	</div>
+</body>
+
+<script>
+	var xhttp;	
+	function g(i) { return document.getElementById(i) };
+	function record (k,l,m) {
+		var btn = g(k);
+		var code1 = g(l);
+		var code2 = g(m);
+		var protocol = g('ir_protocol');
+		btn.value = "Press button...";
+		if (!xhttp) { //prevent simultaneous requests
+			xhttp = new XMLHttpRequest();
+			xhttp.open("POST", "/rec_ir?device=4&protocol=" + protocol.value);
+			xhttp.send();
+			xhttp.onreadystatechange = function () {
+				if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200) {
+					var data = JSON.parse(xhttp.responseText);
+					code1.value = data.ir_code1;
+					code2.value = data.ir_code2;
+					protocol.value = data.ir_protocol;
+					xhttp = null;
+					btn.value = "Record";
+				}
+			}
+		}
+	}
+	function transmit(f) {
+		var btn = g('submit');
+		btn.value = "Saving data...";
+		if (!xhttp) { //prevent simultaneous requests
+			xhttp = new XMLHttpRequest();
+			xhttp.open("POST", "/dev");
+			xhttp.send(f ? (new FormData(f)) : "");
+			xhttp.onreadystatechange = function () {
+				if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200) {
+					xhttp = null;
+					window.location.reload(false);
+				}
+			}
+		}
+	}
+	function load_data() {
+		var dev_name = g('device_name');
+		var ir_protocol = g('ir_protocol');
+		var label1 = g('volup_HEX1');
+		var label2 = g('volup_HEX2');
+		var label3 = g('voldwn_HEX1');
+		var label4 = g('voldwn_HEX2');
+		var label5 = g('comm1');
+		var label6 = g('comm1_HEX1');
+		var label7 = g('comm1_HEX2');
+		var label8 = g('comm2');
+		var label9 = g('comm2_HEX1');
+		var label10 = g('comm2_HEX2');
+		var label11 = g('comm3');
+		var label12 = g('comm3_HEX1');
+		var label13 = g('comm3_HEX2');
+		var label14 = g('comm4');
+		var label15 = g('comm4_HEX1');
+		var label16 = g('comm4_HEX2');
+		var label17 = g('comm5');
+		var label18 = g('comm5_HEX1');
+		var label19 = g('comm5_HEX2');
+		var label20 = g('comm6');
+		var label21 = g('comm6_HEX1');
+		var label22 = g('comm6_HEX2');
+		var label23 = g('comm7');
+		var label24 = g('comm7_HEX1');
+		var label25 = g('comm7_HEX2');
+		var label26 = g('comm8');
+		var label27 = g('comm8_HEX1');
+		var label28 = g('comm8_HEX2');
+		var label29 = g('comm9');
+		var label30 = g('comm9_HEX1');
+		var label31 = g('comm9_HEX2');
+		var label32 = g('comm10');
+		var label33 = g('comm10_HEX1');
+		var label34 = g('comm10_HEX2');
+		var label35 = g('comm11');
+		var label36 = g('comm11_HEX1');
+		var label37 = g('comm11_HEX2');
+		var label38 = g('comm12');		
+		var label39 = g('comm12_HEX1');
+		var label40 = g('comm12_HEX2');
+		var label41 = g('comm13');
+		var label42 = g('comm13_HEX1');
+		var label43 = g('comm13_HEX2');
+		var label44 = g('comm14');
+		var label45 = g('comm14_HEX1');
+		var label46 = g('comm14_HEX2');
+		var label47 = g('comm15');
+		var label48 = g('comm15_HEX1');
+		var label49 = g('comm15_HEX2');
+		var label50 = g('comm16');
+		var label51 = g('comm16_HEX1');
+		var label52 = g('comm16_HEX2');
+		var label53 = g('comm17');
+		var label54 = g('comm17_HEX1');
+		var label55 = g('comm17_HEX2');
+		var label56 = g('comm18');
+		var label57 = g('comm18_HEX1');
+		var label58 = g('comm18_HEX2');
+		var label59 = g('comm19');
+		var label60 = g('comm19_HEX1');
+		var label61 = g('comm19_HEX2');
+		var label62 = g('comm20');
+		var label63 = g('comm20_HEX1');
+		var label64 = g('comm20_HEX2');	
+		var digit0_h1 = g('digit0_HEX1');
+		var digit0_h2 = g('digit0_HEX2');
+		var digit1_h1 = g('digit1_HEX1');
+		var digit1_h2 = g('digit1_HEX2');
+		var digit2_h1 = g('digit2_HEX1');
+		var digit2_h2 = g('digit2_HEX2');
+		var digit3_h1 = g('digit3_HEX1');
+		var digit3_h2 = g('digit3_HEX2');
+		var digit4_h1 = g('digit4_HEX1');
+		var digit4_h2 = g('digit4_HEX2');
+		var digit5_h1 = g('digit5_HEX1');
+		var digit5_h2 = g('digit5_HEX2');
+		var digit6_h1 = g('digit6_HEX1');
+		var digit6_h2 = g('digit6_HEX2');
+		var digit7_h1 = g('digit7_HEX1');
+		var digit7_h2 = g('digit7_HEX2');
+		var digit8_h1 = g('digit8_HEX1');
+		var digit8_h2 = g('digit8_HEX2');
+		var digit9_h1 = g('digit9_HEX1');
+		var digit9_h2 = g('digit9_HEX2');
+		if (!xhttp) { //prevent simultaneous requests
+			xhttp = new XMLHttpRequest();
+			xhttp.open("POST", "/req_dev?device=4");
+			xhttp.send();
+			xhttp.onreadystatechange = function () {
+				if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200) {
+					var data = JSON.parse(xhttp.responseText);
+					dev_name.value = data.device_name;
+					ir_protocol.value = data.ir_protocol;
+					label1.value = data.volup_HEX1;
+					label2.value = data.volup_HEX2;
+					label3.value = data.voldwn_HEX1;
+					label4.value = data.voldwn_HEX2;
+					label5.value = data.comm1;
+					label6.value = data.comm1_HEX1;
+					label7.value = data.comm1_HEX2;
+					label8.value = data.comm2;
+					label9.value = data.comm2_HEX1;
+					label10.value = data.comm2_HEX2;
+					label11.value = data.comm3;
+					label12.value = data.comm3_HEX1;
+					label13.value = data.comm3_HEX2;
+					label14.value = data.comm4;
+					label15.value = data.comm4_HEX1;
+					label16.value = data.comm4_HEX2;
+					label17.value = data.comm5;
+					label18.value = data.comm5_HEX1;
+					label19.value = data.comm5_HEX2;
+					label20.value = data.comm6;
+					label21.value = data.comm6_HEX1;
+					label22.value = data.comm6_HEX2;
+					label23.value = data.comm7;
+					label24.value = data.comm7_HEX1;
+					label25.value = data.comm7_HEX2;
+					label26.value = data.comm8;
+					label27.value = data.comm8_HEX1;
+					label28.value = data.comm8_HEX2;
+					label29.value = data.comm9;
+					label30.value = data.comm9_HEX1;
+					label31.value = data.comm9_HEX2;
+					label32.value = data.comm10;
+					label33.value = data.comm10_HEX1;
+					label34.value = data.comm10_HEX2;	
+					label35.value = data.comm11;
+					label36.value = data.comm11_HEX1;
+					label37.value = data.comm11_HEX2;
+					label38.value = data.comm12;
+					label39.value = data.comm12_HEX1;
+					label40.value = data.comm12_HEX2;
+					label41.value = data.comm13;
+					label42.value = data.comm13_HEX1;
+					label43.value = data.comm13_HEX2;
+					label44.value = data.comm14;
+					label45.value = data.comm14_HEX1;
+					label46.value = data.comm14_HEX2;
+					label47.value = data.comm15;
+					label48.value = data.comm15_HEX1;
+					label49.value = data.comm15_HEX2;
+					label50.value = data.comm16;
+					label51.value = data.comm16_HEX1;
+					label52.value = data.comm16_HEX2;
+					label53.value = data.comm17;
+					label54.value = data.comm17_HEX1;
+					label55.value = data.comm17_HEX2;
+					label56.value = data.comm18;
+					label57.value = data.comm18_HEX1;
+					label58.value = data.comm18_HEX2;
+					label59.value = data.comm19;
+					label60.value = data.comm19_HEX1;
+					label61.value = data.comm19_HEX2;
+					label62.value = data.comm20;
+					label63.value = data.comm20_HEX1;
+					label64.value = data.comm20_HEX2;	
+					digit0_h1.value = data.digit0_HEX1;		
+					digit0_h2.value = data.digit0_HEX2;
+					digit1_h1.value = data.digit1_HEX1;		
+					digit1_h2.value = data.digit1_HEX2;
+					digit2_h1.value = data.digit2_HEX1;		
+					digit2_h2.value = data.digit2_HEX2;
+					digit3_h1.value = data.digit3_HEX1;		
+					digit3_h2.value = data.digit3_HEX2;
+					digit4_h1.value = data.digit4_HEX1;		
+					digit4_h2.value = data.digit4_HEX2;
+					digit5_h1.value = data.digit5_HEX1;		
+					digit5_h2.value = data.digit5_HEX2;
+					digit6_h1.value = data.digit6_HEX1;		
+					digit6_h2.value = data.digit6_HEX2;
+					digit7_h1.value = data.digit7_HEX1;		
+					digit7_h2.value = data.digit7_HEX2;
+					digit8_h1.value = data.digit8_HEX1;		
+					digit8_h2.value = data.digit8_HEX2;
+					digit9_h1.value = data.digit9_HEX1;		
+					digit9_h2.value = data.digit9_HEX2;
+					xhttp = null;
+				}
+			}
+		}
+	}
+</script>

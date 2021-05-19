@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
+	<title>IR Hub Main Menu</title>
+	<h3>IR Hub Main Menu</h3>
+	<script>
+		function g(i){return document.getElementById(i);};
+		function p(t,l){if(confirm(t)) window.location=l;};
+		function E(s){return document.createElement(s)};
+		var S="setAttribute",A="appendChild",H="innerHTML",X,wl;
+	</script>
+	<style>
+		input {
+			font-size:1em;
+		}
+		select {
+			font-size:1em;
+		}
+		body {
+			text-align:center;
+			font-family:arial;
+			font-size:1em;
+		}
+		button {
+			line-height:2em;
+			font-size:1em;
+			width:320px;
+		}
+	</style>
+</head>
+
+<body>
+	<div style='text-align:center;display:inline-block;width:320px;padding:5px'>
+		<form method="get" action="wifi.htm">
+			<button type="submit">WiFi Setup</button>
+		</form>
+		<br>
+		<form method="get" action="mqtt_server.htm">
+			<button type="submit">MQTT Server Setup</button>
+		</form>
+		<br>
+		<form method="get" action="device1.htm">
+			<button type="submit">Device 1 Setup</button>
+		</form>
+		<br>
+		<form method="get" action="device2.htm">
+			<button type="submit">Device 2 Setup</button>
+		</form>
+		<br>
+		<form method="get" action="device3.htm">
+			<button type="submit">Device 3 Setup</button>
+		</form>
+		<br>
+		<form method="get" action="device4.htm">
+			<button type="submit">Device 4 Setup</button>
+		</form>
+		<br>
+		<form method="get" action="device5.htm">
+			<button type="submit">Device 5 Setup</button>
+		</form>
+		<br>
+		<form method="get" action="device6.htm">
+			<button type="submit">Device 6 Setup</button>
+		</form>
+		<br>
+		<form method="get" action="procedure1.htm">
+			<button type="submit">Procedure 1 Setup</button>
+		</form>
+		<br>
+		<form method="get" action="procedure2.htm">
+			<button type="submit">Procedure 2 Setup</button>
+		</form>
+		<br>
+		<form method="get" action="procedure3.htm">
+			<button type="submit">Procedure 3 Setup</button>
+		</form>
+		<br>
+		<form method="get" action="led.htm">
+		<button type="submit">LED Strip Setup</button>
+		</form>
+		<br>
+		<button onclick="p('Reboot device?','/wifi/rst')">Reboot</button>
+		<br><br>
+	</div>
+</body>
+
+
+</html>

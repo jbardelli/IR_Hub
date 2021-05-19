@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html><head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
+	<title>IR Hub MQTT Configuration</title>
+	<h3>IR Hub MQTT Configuration</h3>
+	<style>
+		input {
+			font-size:1em;
+			text-align: center;
+		}
+		body {
+			text-align:center;
+			font-family:arial;
+			font-size:1em;
+		}
+		button {
+			line-height:2em;
+			width:100%;
+			display:block;
+			font-size:1em;
+		}
+		table {
+			text-align: center;
+		}
+	</style>
+</head>
+
+<body onload="load_data()">
+	<div style='text-align:center;display:inline-block;width:350px;padding:5px'>
+		<a href="index.htm">Main Menu</a><br><br>
+		<form id="serverform" onsubmit="transmit(this);return false">
+		<table>
+			<tr>	
+				<td height="35">MQTT Server:</td>
+				<td><input type="text" id="mqtt_server" name="mqtt_server" /></td>
+				</tr>
+			<tr>	
+				<td height="35">MQTT Port:</td>
+				<td><input type="number" id="mqtt_port" name="mqtt_port" /></td>
+				</tr>
+			<tr>	
+				<td height="35">MQTT User:</td>
+				<td><input type="text" id="mqtt_user" name="mqtt_user" /></td>
+				</tr>
+			<tr>	
+				<td height="35">MQTT Password:</td>
+				<td><input type="password" id="mqtt_pass" name="mqtt_pass" /></td>
+				</tr>
+			<tr>	
+			<td height="35">MQTT Feed:</td>
+			<td><input type="text" id="mqtt_feed" name="mqtt_feed" /></td>
+				</tr>
+			</table>
+		<br>
+		<input id="submit" type="submit" value="Save"/>
+		</form>	
+	</div>	
+	
+	<script>
+	function g(i) { return document.getElementById(i) };
+	var xhttp;
+	function transmit(f) {
+		var btn = g('submit');
+		btn.value = "Saving data...";
+		if (!xhttp) { //prevent simultaneous requests 	
+			xhttp = new XMLHttpRequest();
+			xhttp.open("POST", "/mqtt");
+			xhttp.send(f ? (new FormData(f)) : "");
+			xhttp.onreadystatechange = function () {
+				if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200) {
+					xhttp = null;
+					window.location.reload(false);
+				}
+			}
+		}
+	}
+	function load_data() {
+		var label1 = g('mqtt_server');
+		var label2 = g('mqtt_port');
+		var label3 = g('mqtt_user');
+		var label4 = g('mqtt_pass');
+		var label5 = g('mqtt_feed');
+		if (!xhttp) { //prevent simultaneous requests
+			xhttp = new XMLHttpRequest();
+			xhttp.open("POST", "/req_mqtt");
+			xhttp.send();
+			xhttp.onreadystatechange = function () {
+				if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200) {
+					var data = JSON.parse(xhttp.responseText);
+					label1.value = data.mqtt_server;
+					label2.value = data.mqtt_port;
+					label3.value = data.mqtt_user;
+					label4.value = data.mqtt_pass;
+					label5.value = data.mqtt_feed;
+					xhttp = null;
+				}
+			}
+		}
+	}
+	</script>
+</body>
+

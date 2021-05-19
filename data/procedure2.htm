@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html><head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
+	<title>IR Hub Procedure 2 Configuration</title>
+	<h3>IR Hub Procedure 2 Configuration</h3>
+	<style>
+		input {
+			font-size:1em;
+			text-align: center;
+			width: 150px;
+		}
+		select {
+			font-size:1em;
+		}
+		body {
+			text-align:center;
+			font-family:arial;
+			font-size:1em;
+		}
+		button {
+			font-size:1em;
+		}
+		</style>
+</head>
+<body onload="load_data()">
+	<div style='text-align:center;display:inline-block;width:650px;padding:5px'>
+		<a href="index.htm">Main Menu</a><br><br>
+		<form id="serverform" onsubmit="transmit(this);return false">
+		<input type="hidden" name="procedure" value="2">
+		<table>				
+				<tr>
+					<td height="35">Procedure Keyword</td>
+					<td><input type="text" id="keyword" name="keyword" /></td>
+					</tr>
+					<tr><td><br /><br /></td></tr>
+				<tr>
+					<th>Device Name</th>
+					<th>Command</th>
+					<th>Repeats</th>
+					<th>Delay in seconds</th>
+					</tr>
+				<tr>	
+					<td height="35"><input type="text" id="step1_dev" name="step1_dev" 	/></td>
+					<td><input type="text"		id="step1_comm" 	name="step1_comm" 	/></td>
+					<td><input type="number" 	id="step1_repeat" 	name="step1_repeat" /></td>
+					<td><input type="number" 	id="step1_delay" 	name="step1_delay" 	/></td>
+					</tr>
+				<tr>	
+					<td height="35"><input type="text" id="step2_dev" name="step2_dev" 	/></td>
+					<td><input type="text"		id="step2_comm" 	name="step2_comm" 	/></td>
+					<td><input type="number" 	id="step2_repeat" 	name="step2_repeat" /></td>
+					<td><input type="number" 	id="step2_delay" 	name="step2_delay" 	/></td>
+					</tr>
+				<tr>	
+					<td height="35"><input type="text" id="step3_dev" name="step3_dev" 	/></td>
+					<td><input type="text"		id="step3_comm" 	name="step3_comm" 	/></td>
+					<td><input type="number" 	id="step3_repeat" 	name="step3_repeat" /></td>
+					<td><input type="number" 	id="step3_delay" 	name="step3_delay" 	/></td>
+					</tr>	
+				<tr>	
+					<td height="35"><input type="text" id="step4_dev" name="step4_dev" 	/></td>
+					<td><input type="text"		id="step4_comm" 	name="step4_comm" 	/></td>
+					<td><input type="number" 	id="step4_repeat" 	name="step4_repeat" /></td>
+					<td><input type="number" 	id="step4_delay" 	name="step4_delay" 	/></td>
+					</tr>	
+				<tr>	
+					<td height="35"><input type="text" id="step5_dev" name="step5_dev" 	/></td>
+					<td><input type="text"		id="step5_comm" 	name="step5_comm" 	/></td>
+					<td><input type="number" 	id="step5_repeat" 	name="step5_repeat" /></td>
+					<td><input type="number" 	id="step5_delay" 	name="step5_delay" 	/></td>
+					</tr>
+				<tr>	
+					<td height="35"><input type="text" id="step6_dev" name="step6_dev" 	/></td>
+					<td><input type="text"		id="step6_comm" 	name="step6_comm" 	/></td>
+					<td><input type="number" 	id="step6_repeat" 	name="step6_repeat" /></td>
+					<td><input type="number" 	id="step6_delay" 	name="step6_delay" 	/></td>
+					</tr>
+				<tr>	
+					<td height="35"><input type="text" id="step7_dev" name="step7_dev" 	/></td>
+					<td><input type="text"		id="step7_comm" 	name="step7_comm" 	/></td>
+					<td><input type="number" 	id="step7_repeat" 	name="step7_repeat" /></td>
+					<td><input type="number" 	id="step7_delay" 	name="step7_delay" 	/></td>
+					</tr>	
+				<tr>	
+					<td height="35"><input type="text" id="step8_dev" name="step8_dev" 	/></td>
+					<td><input type="text"		id="step8_comm" 	name="step8_comm" 	/></td>
+					<td><input type="number" 	id="step8_repeat" 	name="step8_repeat" /></td>
+					<td><input type="number" 	id="step8_delay" 	name="step8_delay" 	/></td>
+					</tr>
+				<tr>	
+					<td height="35"><input type="text" id="step9_dev" name="step9_dev" 	/></td>
+					<td><input type="text"		id="step9_comm" 	name="step9_comm" 	/></td>
+					<td><input type="number" 	id="step9_repeat" 	name="step9_repeat" /></td>
+					<td><input type="number" 	id="step9_delay" 	name="step9_delay" 	/></td>
+					</tr>	
+				<tr>	
+					<td height="35"><input type="text" id="step10_dev" name="step10_dev"/></td>
+					<td><input type="text"		id="step10_comm" 	name="step10_comm" 	/></td>
+					<td><input type="number" 	id="step10_repeat" 	name="step10_repeat"/></td>
+					<td><input type="number" 	id="step10_delay" 	name="step10_delay" /></td>
+					</tr>
+				</table>
+		<br>
+		<input id="submit" type="submit" value="Save"/>
+		</form>	
+	</div>
+</body>
+<script>
+	function g(i) { return document.getElementById(i) };
+	var xhttp;
+	function transmit(f) {
+		var btn = g('submit');
+		btn.value = "Saving data...";
+		if (!xhttp) { //prevent simultaneous requests
+			xhttp = new XMLHttpRequest();
+			xhttp.open("POST", "/proc");
+			xhttp.send(f ? (new FormData(f)) : "");
+			xhttp.onreadystatechange = function () {
+				if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200) {
+					xhttp = null;
+					window.location.reload(false);
+				}
+			}
+		}
+	}
+	function load_data() {
+		var keyword = g('keyword');
+		var label1 = g('step1_dev');
+		var label2 = g('step1_comm');
+		var label3 = g('step1_repeat');
+		var label4 = g('step1_delay');
+		var label5 = g('step2_dev');
+		var label6 = g('step2_comm');
+		var label7 = g('step2_repeat');
+		var label8 = g('step2_delay');
+		var label9 = g('step3_dev');
+		var label10 = g('step3_comm');
+		var label11 = g('step3_repeat');
+		var label12 = g('step3_delay');		
+		var label13 = g('step4_dev');
+		var label14 = g('step4_comm');
+		var label15 = g('step4_repeat');
+		var label16 = g('step4_delay');		
+		var label17 = g('step5_dev');
+		var label18 = g('step5_comm');
+		var label19 = g('step5_repeat');
+		var label20 = g('step5_delay');	
+		var label21 = g('step6_dev');
+		var label22 = g('step6_comm');
+		var label23 = g('step6_repeat');
+		var label24 = g('step6_delay');
+		var label25 = g('step7_dev');
+		var label26 = g('step7_comm');
+		var label27 = g('step7_repeat');
+		var label28 = g('step7_delay');
+		var label29 = g('step8_dev');
+		var label30 = g('step8_comm');
+		var label31 = g('step8_repeat');
+		var label32 = g('step8_delay');
+		var label33 = g('step9_dev');
+		var label34 = g('step9_comm');
+		var label35 = g('step9_repeat');
+		var label36 = g('step9_delay');		
+		var label37 = g('step10_dev');
+		var label38 = g('step10_comm');
+		var label39 = g('step10_repeat');
+		var label40 = g('step10_delay');	
+		if (!xhttp) { //prevent simultaneous requests
+			xhttp = new XMLHttpRequest();
+			xhttp.open("POST", "/req_proc?procedure=2");
+			xhttp.send();
+			xhttp.onreadystatechange = function () {
+				if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200) {
+					var data = JSON.parse(xhttp.responseText);
+					keyword.value = data.keyword;
+					label1.value = data.step1_dev;
+					label2.value = data.step1_comm;
+					label3.value = data.step1_repeat;
+					label4.value = data.step1_delay;
+					label5.value = data.step2_dev;
+					label6.value = data.step2_comm;
+					label7.value = data.step2_repeat;
+					label8.value = data.step2_delay;
+					label9.value = data.step3_dev;
+					label10.value = data.step3_comm;
+					label11.value = data.step3_repeat;
+					label12.value = data.step3_delay;
+					label13.value = data.step4_dev;
+					label14.value = data.step4_comm;
+					label15.value = data.step4_repeat;
+					label16.value = data.step4_delay;
+					label17.value = data.step5_dev;
+					label18.value = data.step5_comm;
+					label19.value = data.step5_repeat;
+					label20.value = data.step5_delay;
+					label21.value = data.step6_dev;
+					label22.value = data.step6_comm;
+					label23.value = data.step6_repeat;
+					label24.value = data.step6_delay;
+					label25.value = data.step7_dev;
+					label26.value = data.step7_comm;
+					label27.value = data.step7_repeat;
+					label28.value = data.step7_delay;
+					label29.value = data.step8_dev;
+					label30.value = data.step8_comm;
+					label31.value = data.step8_repeat;
+					label32.value = data.step8_delay;
+					label33.value = data.step9_dev;
+					label34.value = data.step9_comm;
+					label35.value = data.step9_repeat;
+					label36.value = data.step9_delay;
+					label37.value = data.step10_dev;
+					label38.value = data.step10_comm;
+					label39.value = data.step10_repeat;
+					label40.value = data.step10_delay;
+					xhttp = null;
+				}
+			}
+		}
+	}
+</script>

@@ -1,0 +1,7 @@
+{
+  "mqtt_server": "io.adafruit.com",
+  "mqtt_port": 1883,
+  "mqtt_user": "jbardelli",
+  "mqtt_pass": "497e8b91dbd943e88500ff360969875a",
+  "mqtt_feed": "/f/commands"
+}

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html><head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
+	<title>LED Strip Configuration</title>
+	<h3>LED Strip Configuration</h3>
+	<style>
+		input {
+			font-size:1em;
+			text-align: center;
+		}
+		select {
+			font-size:1em;
+			text-align: center;
+		}
+		body {
+			text-align:center;
+			font-family:arial;
+			font-size:1em;
+		}
+		button {
+			line-height:2em;
+			width:100%;
+			display:block;
+			font-size:1em;
+		}
+		table {
+			text-align: center;
+		}
+	</style>
+</head>
+
+<body onload="load_data()">
+	<div style='text-align:center;display:inline-block;width:350px;padding:0px'>
+		<a href="index.htm">Main Menu</a><br><br>
+		<form id="serverform" onsubmit="transmit(this);return false">
+		<table>
+			<tr>	
+				<td height="35">Mode:</td>
+				<td><select id="mode" name="mode">  
+						  <option value="OFF" 		height="35">OFF</option>
+						  <option value="ON"		height="35">ON</option>
+					</select></td>
+				</tr>
+			<tr>	
+				<td height="35">Intensity:</td>
+				<td><select id="intensity" name="intensity">  
+						  <option value="1" 		height="35">1</option>
+						  <option value="2"			height="35">2</option>
+						  <option value="3" 		height="35">3</option>
+						  <option value="4" 		height="35">4</option>
+						  <option value="5" 		height="35">5</option>
+					</select></td>
+				</tr>
+			<tr>	
+				<td height="35">R:</td>
+				<td><input type="text" 	id="R" name="R" /></td>
+				</tr>
+			<tr>
+				<td height="35">G:</td>
+				<td><input type="text" 	id="G" name="G" /></td>
+				</tr>
+			<tr>
+				<td height="35">B:</td>
+				<td><input type="text" 	id="B" name="B" /></td>
+				</tr>
+			</table>
+		<br>
+		<input id="submit" type="submit" value="Save"/>
+		<br><br>
+		</form>		
+		<canvas id="wheelCanvas" onclick="getColor(event)">
+		</canvas>
+	</div>
+	
+	<script>
+	// Display the color wheel in the canvas, 2D drawing canvas management 
+	var canvas = document.getElementById('wheelCanvas');
+	var context = canvas.getContext('2d');
+	var imageObj = new Image();
+	// Needed to prevent "Uncaught SecurityError: Failed to execute 'getImageData'"
+	imageObj.crossOrigin = 'anonymous';
+      
+	// Crude attempt to get the color wheel to fit in the browser window regardless of the portrait/landscape orientation
+	var dimension;
+	if(window.innerHeight<window.innerWidth){
+		dimension=window.innerHeight;
+	} else {
+      	dimension=window.innerWidth;
+	}
+    
+    // Load the image   
+	imageObj.onload = function() {
+		context.drawImage(imageObj,0,0,700,700,0,0,0.5*dimension,0.5*dimension);
+	};
+	imageObj.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/RGB_color_wheel_360.svg/600px-RGB_color_wheel_360.svg.png";
+	canvas.height=window.innerHeight;
+	canvas.width=window.innerWidth;
+	
+	// Function called each time the canvas is clicked
+	function getColor(event) {
+		var canvas = document.getElementById('wheelCanvas');  // Get canvas handle
+		var pixelData = canvas.getContext('2d').getImageData(event.offsetX, event.offsetY, 1, 1).data;// Get pixel data where the click happened
+		var nr = g('R');
+		var ng = g('G');
+		var nb = g('B');
+		nr.value=pixelData[0].toString();
+		ng.value=pixelData[1].toString();
+		nb.value=pixelData[2].toString(); 
+}
+	// get element by id
+	function g(i) { return document.getElementById(i) };
+	var xhttp;
+	// transmit form when save button is pressed
+	function transmit(f) {
+		var btn = g('submit');
+		btn.value = "Saving data...";
+		if (!xhttp) { //prevent simultaneous requests 	
+			xhttp = new XMLHttpRequest();
+			xhttp.open("POST", "/led");
+			xhttp.send(f ? (new FormData(f)) : "");
+			xhttp.onreadystatechange = function () {
+				if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200) {
+					xhttp = null;
+					window.location.reload(false);
+				}
+			}
+		}
+	}
+	// populate input fields with current data when page loads
+	function load_data() {
+		var label1 = g('mode');
+		var label2 = g('intensity');
+		var label3 = g('R');
+		var label4 = g('G');
+		var label5 = g('B');
+		if (!xhttp) { //prevent simultaneous requests
+			xhttp = new XMLHttpRequest();
+			xhttp.open("POST", "/req_led");
+			xhttp.send();
+			xhttp.onreadystatechange = function () {
+				if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200) {
+					var data = JSON.parse(xhttp.responseText);
+					label1.value = data.mode;
+					label2.value = data.intensity;
+					label3.value = data.R;
+					label4.value = data.G;
+					label5.value = data.B;
+					xhttp = null;
+				}
+			}
+		}
+	}
+	</script>
+</body>
+
